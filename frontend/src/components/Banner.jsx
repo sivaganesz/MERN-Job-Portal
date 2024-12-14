@@ -21,7 +21,7 @@ const Banner = ({query,handleInputChange}) => {
                     <input type="text" name="title" id='title' placeholder='location'
                     className='block flex-1 border-0 bg-transparent py-2 pl-8 text-gray-900
                     placeholder:text-gray-400 focus:right-0 sm:text-sm leading-6' 
-                    onChange={handleInputChange} value={query}/>
+                    />
                     <FiMapPin className='absolute mt-2.5 ml-2 text-gray-400'/>
                 </div>
                 <button type='submit' className='bg-blue text-white px-8 py-2 md:rounded-s-none rounded'>
