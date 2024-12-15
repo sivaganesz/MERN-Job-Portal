@@ -10,7 +10,6 @@ function App() {
     <>
     <Navbar/>
     <Outlet/>
-    <footer>footer</footer>
     </>
   )
 }

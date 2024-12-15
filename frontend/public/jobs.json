@@ -65,7 +65,7 @@
       "salaryType": "Yearly",
       "jobLocation": "London",
       "postingDate": "2024-11-28",
-      "experienceLevel": "Intership",
+      "experienceLevel": "Internship",
       "employmentType": "Full-time",
       "description": "Mollit in laborum tempor Lorem incididunt irure. Aute eu ex ad sunt. Pariatur sint culpa do incididunt eiusmod eiusmod culpa. laborum tempor Lorem incididunt."
     },
@@ -79,7 +79,7 @@
       "maxPrice": "80",
       "salaryType": "Yearly",
       "jobLocation": "Brussels",
-      "postingDate": "2024-12-09",
+      "postingDate": "2024-12-15",
       "experienceLevel": "Any experience",
       "employmentType": "Full-time",
       "description": "Mollit in laborum tempor Lorem incididunt irure. Aute eu ex ad sunt. Pariatur sint culpa do incididunt eiusmod eiusmod culpa. laborum tempor Lorem incididunt."
@@ -136,7 +136,7 @@
       "salaryType": "Yearly",
       "jobLocation": "London",
       "postingDate": "2024-11-28",
-      "experienceLevel": "Intership",
+      "experienceLevel": "Internship",
       "employmentType": "Full-time",
       "description": "Mollit in laborum tempor Lorem incididunt irure. Aute eu ex ad sunt. Pariatur sint culpa do incididunt eiusmod eiusmod culpa. laborum tempor Lorem incididunt."
     },
@@ -150,7 +150,7 @@
       "salaryType": "Yearly",
       "jobLocation": "London",
       "postingDate": "2022-11-05",
-      "experienceLevel": "Intership",
+      "experienceLevel": "Internship",
       "employmentType": "Temporary",
       "description": "Mollit in laborum tempor Lorem incididunt irure. Aute eu ex ad sunt. Pariatur sint culpa do incididunt eiusmod eiusmod culpa. laborum tempor Lorem incididunt."
     }

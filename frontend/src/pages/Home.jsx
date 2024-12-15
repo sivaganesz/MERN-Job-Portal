@@ -64,34 +64,41 @@ const Home = () => {
     }
   }
   //main function
-  const filteredData = (jobs, selected, query) => {
-    let filteredJobs = jobs;
+const filteredData = (jobs, selected, query) => {
+  let filteredJobs = jobs;
+  
 
-    //filtering input
-    if (query) {
+  // Filtering by search query
+  if (query) {
       filteredJobs = filteredItems;
-    }
-
-    //category filtering
-    if (selected) {
-      filteredJobs = filteredJobs.filter(
-        ({ jobLocation, employmentType,experienceLevel,salaryType, maxPrice,postingDate}) => 
-        
-        jobLocation.toLowerCase() === selected.toLowerCase() ||
-        parseInt(maxPrice) <= parseInt(selected) ||
-        postingDate >= selected ||
-        salaryType.toLowerCase() === selected.toLowerCase() ||
-        employmentType.toLowerCase() === selected.toLowerCase() ||
-        experienceLevel.toLowerCase() === selected.toLowerCase()
-    ) 
-      // console.log(filteredJobs);
-    }
-
-    //slice the data based on current page
-    const { startIndex, endIndex } = calculatePageRange();
-    filteredJobs = filteredJobs.slice(startIndex, endIndex)
-    return filteredJobs.map((data, i) => <Card key={i} data={data} />)
   }
+
+  // Filtering by category or date
+  if (selected) {
+      filteredJobs = filteredJobs.filter(({ jobLocation, employmentType, experienceLevel, salaryType, maxPrice, postingDate }) => {
+          const isDateFilter = new Date(selected).toString() !== "Invalid Date";
+          if (isDateFilter && postingDate) {
+              const jobDate = new Date(postingDate);
+              const selectedDate = new Date(selected);
+              return jobDate >= selectedDate;
+          }
+          // Other category-based filtering
+          return (
+              jobLocation.toLowerCase() === selected.toLowerCase() ||
+              parseInt(maxPrice) <= parseInt(selected) ||
+              salaryType.toLowerCase() === selected.toLowerCase() ||
+              employmentType.toLowerCase() === selected.toLowerCase() ||
+              experienceLevel.toLowerCase() === selected.toLowerCase()
+          );
+      });
+  }
+
+  // Slice data for current page
+  const { startIndex, endIndex } = calculatePageRange();
+  filteredJobs = filteredJobs.slice(startIndex, endIndex);
+
+  return filteredJobs.map((data, i) => <Card key={i} data={data} />);
+};
 
   const result = filteredData(jobs, selectedCatagory, query);
 
@@ -112,9 +119,6 @@ const Home = () => {
               <p className='font-bold text-lg mb-2'>{result.length} Jobs</p>
               <h3>no data found!</h3></>
           }
-          {/* {
-            isLoading ? (<p>Loading...</p>) : result.length > 0 ? (<Jobs result={result} />) : (<h3>No jobs found!</h3>)
-          } */}
 
           {/* pagination here */}
           {
