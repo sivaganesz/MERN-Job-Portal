@@ -106,3 +106,54 @@ export const logout = async (req,res) => {
             console.log(error);
     }
 }
+
+export const updateProfile = async(req,res) => {
+    try {
+        const {fullname,email,phoneNumber,bio,skills}=req.body;
+        const file = req.file
+        //field check
+        if(!fullname || !email || !phoneNumber || !bio || !skills){
+            return res.status(400).json({
+                message:"Something is missing",
+                success:false
+            })
+        };
+        const skillsArray = skills.split(",");
+        let userId = req.id;
+        //email check
+        const user = await User.findById(userId);
+        if(!user){
+            return res.status(400).json({
+                message:"Something is missing",
+                success:false
+            })
+        }
+
+        //updating data
+        user.fullname=fullname,
+        user.email=email,
+        user.phoneNumber=phoneNumber,
+        user.profile.bio=bio,
+        user.profile.skills=skillsArray
+
+        await user.save();
+
+        user ={
+            _id:user._id,
+            email:user.email,
+            phoneNumber:user.phoneNumber,
+            password:user.password,
+            role:user.role,
+            profile:user.profile
+
+        }
+
+        return res.status(200).json({
+            message:"profile updated successfully.",
+            user,
+            success:true
+        })
+    } catch (error) {
+        
+    }
+}
