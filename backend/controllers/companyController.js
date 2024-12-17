@@ -1,35 +1,55 @@
 import { Company } from '../models/Companymodel.js'
+
 export const registerCompany = async (req, res) => {
     try {
         const { companyName } = req.body;
+
+        // Validate the required field
         if (!companyName) {
             return res.status(400).json({
-                message: "company Name is required",
+                message: "Company name is required",
                 success: false
             });
         }
-        let company = await Company.findOne({ companyName: companyName });
-        if (company) {
+
+        // Check for an existing company with the same name
+        let company = await Company.findOne({ name:companyName });
+        if (company) { // Fix here: condition checks if company already exists
             return res.status(400).json({
-                message: "you can't register same company",
+                message: "You can't register the same company twice",
                 success: false
             });
         }
-        company = await Company.create({
-            companyName: companyName,
-            userId: req.id
-        })
+
+        // Create a new company
+         company = await Company.create({
+            name: companyName,
+            userId: req.id // Assuming `req.id` is available from authentication middleware
+        });
 
         return res.status(201).json({
-            message: "Company register successfully",
+            message: "Company registered successfully",
             company,
             success: true
-        })
+        });
     } catch (error) {
-        console.log(error);
+        console.error("Error while registering company:", error);
 
+        // Handle specific MongoDB duplicate key errors
+        if (error.code === 11000) {
+            return res.status(400).json({
+                message: "Duplicate company name is not allowed",
+                success: false
+            });
+        }
+
+        // General error response
+        return res.status(500).json({
+            message: "Something went wrong",
+            success: false
+        });
     }
-}
+};
 
 export const getCompany = async (req, res) => {
     try {
