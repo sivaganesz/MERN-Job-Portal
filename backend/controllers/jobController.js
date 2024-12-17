@@ -31,7 +31,7 @@ export const createPostJob = async(req , res) => {
             success:true
         })
     } catch (error) {
-        console.log(error);
+        console.log("Error occurred in createPostJob",error);
 
     }
 }

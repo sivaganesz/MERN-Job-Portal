@@ -43,7 +43,7 @@ export const applyJob = async (req, res) => {
             sucess: true
         })
     } catch (error) {
-        console.log(error);
+        console.log("Error applyJob",error);
 
     }
 }
@@ -72,7 +72,7 @@ export const getAppliedJobs = async (req, res) => {
             success: true
         })
     } catch (error) {
-        console.log(error);
+        console.log("Error getAppliedJobs",error);
 
     }
 }
@@ -102,7 +102,7 @@ export const getApplicants = async (req,res)=>{
             success: true
         })
     } catch (error) {
-        console.log(error);
+        console.log("Error getApplicants",error);
         
     }
 }
@@ -140,9 +140,5 @@ export const updateStatus = async (req, res) => {
         });
     } catch (error) {
         console.error("Error updating status:", error);
-        return res.status(500).json({
-            message: "Something went wrong",
-            success: false
-        });
     }
 };

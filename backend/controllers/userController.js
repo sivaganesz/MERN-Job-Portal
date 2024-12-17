@@ -32,7 +32,7 @@ export const register = async (req,res) => {
             success:true
         })
     }catch(error){
-        console.log(error);
+        console.log("Error occurred in  register",error);
     }
 }
 

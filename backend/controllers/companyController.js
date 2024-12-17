@@ -42,12 +42,6 @@ export const registerCompany = async (req, res) => {
                 success: false
             });
         }
-
-        // General error response
-        return res.status(500).json({
-            message: "Something went wrong",
-            success: false
-        });
     }
 };
 
@@ -66,7 +60,7 @@ export const getCompany = async (req, res) => {
             success:true
         })
     } catch (error) {
-        console.log(error);
+        console.log("Error getCompany",error);
     }
 }
 
@@ -85,7 +79,7 @@ export const getCompanyById = async (req,res)=>{
             success:true
         })
     } catch (error) {
-        console.log(error);
+        console.log("Error getCompanyById",error);
     }
 }
 
@@ -106,6 +100,6 @@ export const updateCompany = async (req, res) => {
             success: true
         });
     } catch (error) {
-        console.log(error);
+        console.log("Error updateCompany information",error);
     }
 }
