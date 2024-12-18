@@ -8,29 +8,21 @@ import Signup from './components/auth/Signup';
 const appRouter = createBrowserRouter([
   {
     path: '/',
-    element: (
-      <>
-        <Home />
-      </>
-    ),
+    element:<Home />,
   },
   {
     path: '/login',
-    element: (
-      <>
+    element: (<>
         <Navbar />
         <Login />
-      </>
-    ),
+    </>),
   },
   {
     path: '/signup',
-    element: (
-      <>
-        <Navbar />
-        <Signup />
-      </>
-    ),
+    element: (<>
+      <Navbar />
+      <Signup />
+      </>),
   },
 ]);
 
@@ -38,7 +30,7 @@ const appRouter = createBrowserRouter([
 function App() {
   return (
     <>
-      <RouterProvider router={appRouter}/>
+      <RouterProvider router={appRouter} />
     </>
   );
 }
