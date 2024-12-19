@@ -3,8 +3,12 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Bookmark } from 'lucide-react';
 import React from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Job = () => {
+
+    const jobId = "zxcvbnm";
+    const navigate =  useNavigate();
     return (
         <div className="bg-white shadow-lg p-6 mx-auto border rounded-lg cursor-pointer transform transition-all duration-300 hover:scale-105 hover:shadow-xl">
             {/* Top Row: Date and Bookmark */}
@@ -17,9 +21,11 @@ const Job = () => {
 
             {/* Company Section */}
             <div className="flex items-center gap-4 mb-3">
-                <Avatar>
-                    <AvatarImage src="https://github.com/shadcn.png" />
-                </Avatar>
+            <Button className="p-6" variant="outline" size="icon">
+                    <Avatar>
+                        <AvatarImage src="https://github.com/shadcn.png" />
+                    </Avatar>
+                </Button>
                 <div>
                     <h1 className="font-semibold text-lg text-gray-800">Company Name</h1>
                     <p className="text-sm text-gray-500">India</p>
@@ -29,7 +35,7 @@ const Job = () => {
             {/* Job Title and Description */}
             <div className="mb-4">
                 <h1 className="font-bold text-xl text-gray-800">Job Title</h1>
-                <p className="text-sm text-gray-600">
+                <p className="text-sm text-gray-600 mt-2">
                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates, laboriosam.
                 </p>
             </div>
@@ -43,7 +49,7 @@ const Job = () => {
 
             {/* Action Buttons */}
             <div className="flex items-center justify-center md:justify-normal lg:justify-normal gap-4">
-                <Button variant="outline">Details</Button>
+                <Button variant="outline" onClick={()=>navigate(`/description/${jobId}`)}>Details</Button>
                 <Button className="bg-cyan-800 text-white hover:bg-cyan-700">Save For Later</Button>
             </div>
         </div>

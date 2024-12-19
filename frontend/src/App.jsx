@@ -1,10 +1,13 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import './App.css';
-import Navbar from './components/shared/Navbar';
+import Navbar from './pages/Navbar';
 import Home from './pages/Home';
 import Login from './components/auth/Login';
 import Signup from './components/auth/Signup';
 import Jobs from './pages/Jobs';
+import Browse from './pages/Browse';
+import Profile from './pages/Profile';
+import JobDescription from './pages/JobDescription';
 
 const appRouter = createBrowserRouter([
   {
@@ -13,24 +16,27 @@ const appRouter = createBrowserRouter([
   },
   {
     path: '/login',
-    element: (<>
-        <Navbar />
-        <Login />
-    </>),
+    element: (<><Navbar /><Login /></>),
   },
   {
     path: '/signup',
-    element: (<>
-      <Navbar />
-      <Signup />
-      </>),
+    element: (<><Navbar /><Signup /></>),
   },
   {
     path:"/jobs",
-    element:(<>
-      <Navbar />
-      <Jobs />
-      </>),
+    element:(<><Navbar /><Jobs /></>),
+  },
+  {
+    path:"/browse",
+    element:(<><Navbar /><Browse /></>),
+  },
+  {
+    path:"/profile",
+    element:(<><Navbar /><Profile /></>),
+  },
+  {
+    path:"/description/:id",
+    element:(<><Navbar /><JobDescription /></>),
   }
 ]);
 

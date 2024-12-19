@@ -1,4 +1,4 @@
-import Navbar from '@/components/shared/Navbar'
+import Navbar from '@/pages/Navbar'
 import React from 'react'
 import HeroSection from './HeroSection'
 import CatagoryCarousel from './CatagoryCarousel'

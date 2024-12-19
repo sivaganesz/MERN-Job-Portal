@@ -1,11 +1,13 @@
 import React,{useState} from 'react'
-import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover'
-import { Avatar, AvatarImage } from '../ui/avatar'
-import { Button } from '../ui/button'
+import { Popover, PopoverContent, PopoverTrigger } from '../components/ui/popover'
+import { Avatar, AvatarImage } from '../components/ui/avatar'
+import { Button } from '../components/ui/button'
 import { LogOut, User2 } from 'lucide-react'
 import { Link, NavLink } from 'react-router-dom'
 
 import { FaBarsStaggered, FaXmark } from "react-icons/fa6";
+import { useSelector } from 'react-redux'
+import store from '@/redux/store'
 
 
 const Navbar = () => {
@@ -18,7 +20,9 @@ const Navbar = () => {
     { path: "/jobs", title: "Jobs" },
     { path: "/Browse", title: "Browse" },
   ]
-  const user = false;
+
+  const {user} = useSelector(store=>store.auth);
+
   return (
     <div className='bg-white'>
       <div className='flex items-center justify-between mx-auto xl:max-w-7xl h-16'>
@@ -60,7 +64,7 @@ const Navbar = () => {
                     </div>
                   </div>
                   <div className='flex flex-row'>
-                    <div className='flex items-center w-fit cursor-pointer'><User2 /><Button variant="link">View Profile</Button></div>
+                    <div className='flex items-center w-fit cursor-pointer'><User2 /><Button variant="link"><Link to="/profile">View Profile</Link></Button></div>
                     <div className='flex items-center w-fit cursor-pointer'><LogOut /><Button variant="link">Logout</Button></div>
                   </div>
                 </PopoverContent>
