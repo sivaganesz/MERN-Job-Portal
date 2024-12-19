@@ -14,8 +14,8 @@ const CatagoryCarousel = () => {
   return (
     <div>
         <Carousel className="w-full max-w-xl mx-auto my-16">
-        <CarouselPrevious/>
-            <CarouselContent>
+        <CarouselPrevious className=""/>
+            <CarouselContent className="ml-0">
                 {
                     catagorys.map((catagory,index)=>(
                         <CarouselItem className="basis-auto md:basis-1/2 lg:basis-1/3" key={index}>
@@ -24,7 +24,7 @@ const CatagoryCarousel = () => {
                     ))
                 }
             </CarouselContent>
-            <CarouselNext/>
+            <CarouselNext className="hidden sm:flex"/>
             
         </Carousel>
 
