@@ -59,7 +59,7 @@ const Signup = () => {
              }
 
     } catch (error) {
-      console.log("registration error :", error);
+      // console.log("registration error :", error);
       toast.error(error.response.data.message)
         // Reset form values
     setInput({

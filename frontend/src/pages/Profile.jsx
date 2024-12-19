@@ -6,8 +6,9 @@ import { Contact, Mail, Pen } from 'lucide-react'
 import React, { useState } from 'react'
 import AppliedJobs from './AppliedJobsTable'
 import UpdateProfileDialog from './UpdateProfileDialog'
+import { useSelector } from 'react-redux'
+import store from '@/redux/store'
 
-const SKills = ["HTML", "CSS", "JavaScript", "React js", "redux"]
 const colors = [
     "bg-red-100 text-red-700",
     "bg-blue-100 text-blue-700",
@@ -20,7 +21,7 @@ const colors = [
 const isResume = true;
 const Profile = () => {
     const [open, setOpen] = useState(false)
-
+    const {user} = useSelector(store=>store.auth)
 
     return (
         <div>
@@ -32,8 +33,8 @@ const Profile = () => {
                             <AvatarImage src="https://github.com/shadcn.png" />
                         </Avatar>
                         <div className="text-center md:text-left lg:text-left">
-                            <h1 className="font-medium text-2xl">SIVAMUTHUNARAYANAN</h1>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Error, suscipit.</p>
+                            <h1 className="font-medium text-2xl">{user?.fullname}</h1>
+                            <p>{user?.profile?.bio}.</p>
                         </div>
                     </div>
                     <Button variant="outline" className="mt-4 lg:mt-0 text-right" onClick={() => setOpen(true)}>
@@ -45,11 +46,11 @@ const Profile = () => {
                 <div className="my-5 text-center md:text-left lg:text-left">
                     <div className="flex items-center gap-3 my-2 justify-center md:justify-start lg:justify-start">
                         <Mail />
-                        <span>sivamuthunarayanan@gmail.com</span>
+                        <span>{user?.email}</span>
                     </div>
                     <div className="flex items-center gap-3 my-2 justify-center md:justify-start lg:justify-start">
                         <Contact />
-                        <span>9876543211</span>
+                        <span>{user?.phoneNumber}</span>
                     </div>
                 </div>
 
@@ -59,8 +60,8 @@ const Profile = () => {
                         <Label className="font-medium text-lg">Skills</Label>
                     </h1>
                     <div className="flex items-center gap-3 my-2 flex-wrap justify-center md:justify-start lg:justify-start">
-                        {SKills.length !== 0 ? (
-                            SKills.map((item, index) => {
+                        {user?.profile?.skills.length !== 0 ? (
+                            user?.profile?.skills.map((item, index) => {
                                 const randomColor = colors[Math.floor(Math.random() * colors.length)];
                                 return (<Badge key={index} className={`px-3 py-2 w-20 flex items-center justify-center ${randomColor}`} > {item}</Badge>);
                             })) : (<span>NA</span>)}
@@ -74,7 +75,7 @@ const Profile = () => {
                     </h1>
                     <div >
 
-                        {isResume ? (<a target="blank" href="https://sivaganesz.github.io/Portfolio/" className="text-blue-800 hover:underline text-lg" > Resume.pdf </a>)
+                        {isResume ? (<a target="blank" href="" className="text-blue-800 hover:underline text-lg" > {user?.profile?.resumeOriginalName}</a>)
                             : (<span>NA</span>)}
                     </div>
                 </div>
