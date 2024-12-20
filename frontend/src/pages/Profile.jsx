@@ -63,7 +63,7 @@ const Profile = () => {
                         {user?.profile?.skills.length !== 0 ? (
                             user?.profile?.skills.map((item, index) => {
                                 const randomColor = colors[Math.floor(Math.random() * colors.length)];
-                                return (<Badge key={index} className={`px-3 py-2 w-20 flex items-center justify-center ${randomColor}`} > {item}</Badge>);
+                                return (<Badge key={index} className={`px-3 py-2 w-auto flex items-center justify-center ${randomColor}`} > {item}</Badge>);
                             })) : (<span>NA</span>)}
                     </div>
                 </div>
@@ -75,7 +75,7 @@ const Profile = () => {
                     </h1>
                     <div >
 
-                        {isResume ? (<a target="blank" href="" className="text-blue-800 hover:underline text-lg" > {user?.profile?.resumeOriginalName}</a>)
+                        {isResume ? (<a target="blank" href={user?.profile?.resume} className="text-blue-800 hover:underline text-lg" > {user?.profile?.resumeOriginalName}</a>)
                             : (<span>NA</span>)}
                     </div>
                 </div>
