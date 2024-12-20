@@ -3,11 +3,15 @@ import { Popover, PopoverContent, PopoverTrigger } from '../components/ui/popove
 import { Avatar, AvatarImage } from '../components/ui/avatar'
 import { Button } from '../components/ui/button'
 import { LogOut, User2 } from 'lucide-react'
-import { Link, NavLink } from 'react-router-dom'
+import { Link, NavLink, useNavigate } from 'react-router-dom'
 
 import { FaBarsStaggered, FaXmark } from "react-icons/fa6";
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import store from '@/redux/store'
+import { toast } from 'sonner'
+import axios from 'axios'
+import { USER_API_END_POINT } from '@/utils/constant'
+import { setUser } from '@/redux/authSlice'
 
 
 const Navbar = () => {
@@ -22,7 +26,19 @@ const Navbar = () => {
   ]
 
   const {user} = useSelector(store=>store.auth);
-
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const logoutHandler = async () => {
+    try {
+      const res = await axios.post(`${USER_API_END_POINT}/logout`,{withCredentials:true})
+      if(res.data.success){
+        dispatch(setUser(null));
+        toast.success(res.data.message)}
+        navigate("/");
+    } catch (error) {
+      toast.error(error.response.data.message);
+    }
+  } 
   return (
     <div className='bg-white'>
       <div className='flex items-center justify-between mx-auto xl:max-w-7xl h-16'>
@@ -49,23 +65,23 @@ const Navbar = () => {
             ) : (
               <Popover>
                 <PopoverTrigger>
-                  <Avatar>
-                    <AvatarImage src="https://github.com/shadcn.png" />
+                  <Avatar className="border border-neutral-700">
+                    <AvatarImage src={user?.profile?.profilePhoto} />
                   </Avatar>
                 </PopoverTrigger>
                 <PopoverContent className="w-80">
                   <div className="flex gap-3">
-                    <Avatar>
-                      <AvatarImage src="https://github.com/shadcn.png" />
+                    <Avatar className="border border-neutral-700">
+                      <AvatarImage src={user?.profile?.profilePhoto} />
                     </Avatar>
                     <div>
-                      <h4 className='font-medium'>sivaganesz</h4>
-                      <p className='text-sm text-muted-foreground'>Lorem, ipsum dolor sit amet consectetur.</p>
+                      <h4 className='font-medium'>{user?.fullname}</h4>
+                      <p className='text-sm text-muted-foreground'>{user?.description}</p>
                     </div>
                   </div>
                   <div className='flex flex-row'>
                     <div className='flex items-center w-fit cursor-pointer'><User2 /><Button variant="link"><Link to="/profile">View Profile</Link></Button></div>
-                    <div className='flex items-center w-fit cursor-pointer'><LogOut /><Button variant="link">Logout</Button></div>
+                    <div className='flex items-center w-fit cursor-pointer'><LogOut /><Button onClick={logoutHandler} variant="link">Logout</Button></div>
                   </div>
                 </PopoverContent>
               </Popover>

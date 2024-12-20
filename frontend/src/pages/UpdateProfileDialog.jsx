@@ -63,7 +63,6 @@ const UpdateProfileDialog = ({ open, setOpen }) => {
             setLoading(false)
         }
         setOpen(false)
-        console.log(input);
     }
     return (
         <div>
@@ -101,6 +100,7 @@ const UpdateProfileDialog = ({ open, setOpen }) => {
                                 <Label htmlFor="file" className="text-left">Resume</Label>
                                 <Input id="file" name="file" type="file" accept="application/pdf" className="col-span-3" onChange={changeFileHandler} />
                             </div>
+        
                         </div>
                         <DialogFooter>
                             {

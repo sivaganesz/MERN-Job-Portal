@@ -18,11 +18,11 @@ const colors = [
     "bg-pink-100 text-pink-700",
     "bg-orange-100 text-orange-700",
 ];
-const isResume = true;
+
 const Profile = () => {
     const [open, setOpen] = useState(false)
-    const {user} = useSelector(store=>store.auth)
-
+    const { user } = useSelector(store => store.auth)
+    const isResume = user?.profile?.resume;
     return (
         <div>
             {/* image, name */}
@@ -30,7 +30,7 @@ const Profile = () => {
                 <div className="flex flex-col md:flex-row lg:flex-row justify-between items-center lg:items-start">
                     <div className="flex flex-col md:flex-row lg:flex-row items-center lg:items-start gap-5">
                         <Avatar className="h-20 w-20">
-                            <AvatarImage src="https://github.com/shadcn.png" />
+                            <AvatarImage src={user?.profile?.profilePhoto} />
                         </Avatar>
                         <div className="text-center md:text-left lg:text-left">
                             <h1 className="font-medium text-2xl">{user?.fullname}</h1>
@@ -75,8 +75,11 @@ const Profile = () => {
                     </h1>
                     <div >
 
-                        {isResume ? (<a target="blank" href={user?.profile?.resume} className="text-blue-800 hover:underline text-lg" > {user?.profile?.resumeOriginalName}</a>)
-                            : (<span>NA</span>)}
+                    {/* {isResume ? (<a target="blank" href={user?.profile?.resume} className="text-blue-800 hover:underline text-lg" > {user?.profile?.resumeOriginalName}</a>)
+                            : (<span>NA</span>)} */}
+                    {
+                        isResume ? <a target='blank' href={user?.profile?.resume} className='text-blue-500 w-full hover:underline cursor-pointer'>{user?.profile?.resumeOriginalName}</a> : <span>NA</span>
+                    }
                     </div>
                 </div>
             </div>
