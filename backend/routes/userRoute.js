@@ -1,7 +1,7 @@
 import express from 'express';
 import { register, login,logout, updateProfile } from '../controllers/userController.js';
 import isAuthenticated from '../middleware/isAuthenticated.js';
-import { singleUpload } from '../middleware/multipar.js';
+import  {singleUpload}  from '../middleware/multipar.js';
 
 const router = express.Router();
 

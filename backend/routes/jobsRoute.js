@@ -6,7 +6,7 @@ const router = express.Router();
 
 router.route("/createpost").post(isAuthenticated,createPostJob);
 router.route("/get").get(isAuthenticated,getAllJobs);
-router.route("/get/:id").post(isAuthenticated,getJobById);
+router.route("/get/:id").get(isAuthenticated,getJobById);
 router.route("/getAdminjobs").get(isAuthenticated,getAdminJobs);
 
 export default router;

@@ -14,6 +14,11 @@ export const register = async (req,res) => {
                 success:false
             })
         };
+
+        const file = req.file;
+        const fileUri = getDataUri(file);
+        const cloudResponse = await cloudinary.uploader.upload(fileUri.content);
+
         //email check
         const user = await User.findOne({email});
         if(user){
@@ -25,7 +30,7 @@ export const register = async (req,res) => {
         //password check
         const hashedPassword = await bcrypt.hash(password,10);
         await User.create({
-            fullname, email, phoneNumber, password: hashedPassword, role,
+            fullname, email, phoneNumber, password: hashedPassword, role,profile:{profilePhoto:cloudResponse.secure_url}
         });
         
 
@@ -116,8 +121,10 @@ export const updateProfile = async(req,res) => {
         const {fullname,email,phoneNumber,bio,skills}=req.body;    
         const file = req.file
         const fileUri = getDataUri(file);
-        const cloudResponse = await cloudinary.uploader.upload(fileUri.content);
-        //field check
+        const cloudResponse = await cloudinary.uploader.upload(fileUri.content, {
+            resource_type: "raw", // Explicitly set resource type to raw
+        });
+                //field check
         let skillsArray;
 
         if(skills) skillsArray = skills.split(",");
@@ -139,11 +146,10 @@ export const updateProfile = async(req,res) => {
         if(bio) user.profile.bio=bio;
         if(skills) user.profile.skills=skillsArray;
 
-        //resume 
-        if(cloudResponse){
-            user.profile.resume = cloudResponse.secure_url //save the cloudinary url
-            user.profile.resumeOriginalName = file.originalname //save the cloudinary url
-
+        //resume
+        if (cloudResponse) {
+            user.profile.resume = cloudResponse.secure_url; // Save the Cloudinary URL
+            user.profile.resumeOriginalName = file.originalname; // Save the original name
         }
 
         await user.save();
