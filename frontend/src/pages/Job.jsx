@@ -7,7 +7,7 @@ import { Link, useNavigate } from 'react-router-dom';
 
 const Job = ({ job }) => {
 
-    const jobId = "zxcvbnm";
+    // const jobId = "zxcvbnm";
     const navigate = useNavigate();
 
     const daysAgoFunction = (mongodbTime) => {
