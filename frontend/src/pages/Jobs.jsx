@@ -4,7 +4,6 @@ import Job from './Job';
 import { useSelector } from 'react-redux';
 import store from '@/redux/store';
 
-const jobsArray = [1, 2, 3, 4, 5, 6, 7, 8];
 
 const Jobs = () => {
     const {allJobs} = useSelector(store=>store.job);

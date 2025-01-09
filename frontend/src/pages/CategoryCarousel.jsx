@@ -10,7 +10,7 @@ const catagorys = [
     "Fullstack Developer",
     
 ]
-const CatagoryCarousel = () => {
+const CategoryCarousel = () => {
   return (
     <div>
         <Carousel className="w-full max-w-xl mx-auto my-16">
@@ -33,4 +33,4 @@ const CatagoryCarousel = () => {
   )
 }
 
-export default CatagoryCarousel
+export default CategoryCarousel

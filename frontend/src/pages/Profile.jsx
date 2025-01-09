@@ -20,8 +20,8 @@ const colors = [
 ];
 
 const Profile = () => {
-    const [open, setOpen] = useState(false)
-    const { user } = useSelector(store => store.auth)
+    const [open, setOpen] = useState(false);
+    const { user } = useSelector(store => store.auth);
     const isResume = user?.profile?.resume;
     return (
         <div>
